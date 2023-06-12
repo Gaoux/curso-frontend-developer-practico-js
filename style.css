@@ -13,6 +13,10 @@
   display: none;
 }
 
+.mobile-menu.inactive {
+  display: block;
+  left: -200px;
+}
 body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
@@ -133,6 +137,7 @@ nav {
   border: solid 1px var(--very-light-pink);
   border-bottom-right-radius: 20px;
   padding: 24px;
+  transition: 0.5s;
 }
 .mobile-menu a {
   text-decoration: none;
