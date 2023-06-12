@@ -6,6 +6,17 @@ const mediaQuery = window.matchMedia('(min-width: 640px)');
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
 burgerMenu.addEventListener('click', toggleMobileMenu);
+
+document.onclick = function (e) {
+  let targetClass = e.target.getAttribute('class');
+
+  if (targetClass !== 'mobile-menu' && targetClass !== 'menu')
+    mobileMenu.classList.add('inactive');
+
+  if (targetClass !== 'desktop-menu' && targetClass !== 'navbar-email')
+    desktopMenu.classList.add('inactive');
+};
+
 menuDisplay(mediaQuery); //Initial check
 mediaQuery.addListener(menuDisplay); // Attach listener function on state changes
 
@@ -16,9 +27,8 @@ function toggleDesktopMenu() {
 function toggleMobileMenu() {
   mobileMenu.classList.toggle('inactive');
 }
-
 //Media querie to display menu
 function menuDisplay(mediaQuery) {
-  if (mediaQuery.matches) mobileMenu.classList.add('inactive');
+  if (mediaQuery.matches) desktopMenu.classList.add('inactive');
   else desktopMenu.classList.add('inactive');
 }
