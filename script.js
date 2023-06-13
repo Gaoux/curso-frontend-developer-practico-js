@@ -3,10 +3,11 @@ const burgerMenu = document.querySelector('.menu');
 const cartIcon = document.querySelector('.navbar-shopping-cart');
 const cardsContainer = document.querySelector('.cards-container');
 const orderContent = document.querySelector('.my-order-content');
+//Deploys
 const desktopMenu = document.querySelector('.desktop-menu');
-
 const mobileMenu = document.querySelector('.mobile-menu');
 const myOrder = document.querySelector('.product-detail');
+//Media Query
 const mediaQuery = window.matchMedia('(min-width: 640px)');
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
@@ -17,18 +18,14 @@ menuDisplay(mediaQuery); //Initial check
 mediaQuery.addListener(menuDisplay); // Attach listener function on state changes
 
 document.onclick = function (e) {
-  let targetClass = e.target.getAttribute('class');
-  if (targetClass !== 'mobile-menu' && targetClass !== 'menu')
+  console.log(e.target);
+  if (!mobileMenu.contains(e.target) && !burgerMenu.contains(e.target))
     mobileMenu.classList.add('inactive');
 
-  if (targetClass !== 'desktop-menu' && targetClass !== 'navbar-email')
+  if (!desktopMenu.contains(e.target) && !menuEmail.contains(e.target))
     desktopMenu.classList.add('inactive');
 
-  if (
-    targetClass !== 'navbar-shopping-cart__icon' &&
-    targetClass !== 'navbar-shopping-cart__number' &&
-    targetClass !== '.product-detail'
-  )
+  if (!myOrder.contains(e.target) && !cartIcon.contains(e.target))
     myOrder.classList.add('inactive');
 };
 
@@ -133,6 +130,13 @@ function changeCartList() {
 renderOrderContent(cartList);
 const orderTotal = orderContent.querySelector('.order p:nth-of-type(2)');
 const orderProducts = document.querySelector('.order-products-container');
+let closeIconOrder = document.querySelectorAll('.shopping-cart .close-icon');
+closeIconOrder = Array.from(closeIconOrder);
+closeIconOrder.forEach((e) => {
+  e.addEventListener('click', function (e) {
+    console.log(this.target.getAttribute('index'));
+  });
+});
 
 function renderOrderContent(arr) {
   let sum = 0.0;
@@ -155,6 +159,7 @@ function renderOrderContent(arr) {
     const closeIcon = document.createElement('img');
     closeIcon.classList.add('close-icon');
     closeIcon.setAttribute('src', './icons/icon_close.png');
+    closeIcon.setAttribute('index', arr.indexOf(product));
 
     shoppingProduct.append(
       shoppingProductFig,
@@ -204,6 +209,7 @@ function addProductOrder(product, index) {
   const closeIcon = document.createElement('img');
   closeIcon.classList.add('close-icon');
   closeIcon.setAttribute('src', './icons/icon_close.png');
+  closeIcon.setAttribute('index', index);
 
   shoppingProduct.append(
     shoppingProductFig,
