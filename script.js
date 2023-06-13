@@ -10,37 +10,16 @@ const myOrder = document.querySelector('.product-detail');
 //Media Query
 const mediaQuery = window.matchMedia('(min-width: 640px)');
 
+//Click event listener to toggle visibility of menus
 menuEmail.addEventListener('click', toggleDesktopMenu);
 burgerMenu.addEventListener('click', toggleMobileMenu);
 cartIcon.addEventListener('click', toggleCartAside);
 
+//Listener to check mediaQuery
 menuDisplay(mediaQuery); //Initial check
 mediaQuery.addListener(menuDisplay); // Attach listener function on state changes
 
-document.onclick = function (e) {
-  console.log(e.target);
-  if (!mobileMenu.contains(e.target) && !burgerMenu.contains(e.target))
-    mobileMenu.classList.add('inactive');
-
-  if (!desktopMenu.contains(e.target) && !menuEmail.contains(e.target))
-    desktopMenu.classList.add('inactive');
-
-  if (!myOrder.contains(e.target) && !cartIcon.contains(e.target))
-    myOrder.classList.add('inactive');
-};
-
-function toggleDesktopMenu() {
-  desktopMenu.classList.toggle('inactive');
-}
-
-function toggleMobileMenu() {
-  mobileMenu.classList.toggle('inactive');
-}
-
-function toggleCartAside() {
-  myOrder.classList.toggle('inactive');
-}
-
+//Product DB List
 const productList = [];
 productList.push({
   name: 'Spiderman vs Spot',
@@ -63,6 +42,59 @@ productList.push({
     'https://w0.peakpx.com/wallpaper/192/766/HD-wallpaper-new-elden-ring-malenia.jpg',
 });
 
+renderProducts(productList);
+
+//Click to product cart icon
+let cartList = [];
+
+let productInfoCart = document.querySelectorAll('.product-info figure');
+productInfoCart = Array.from(productInfoCart);
+productInfoCart.forEach((e) => {
+  e.addEventListener('click', changeCartList);
+});
+
+//Order content
+renderOrderContent(cartList);
+const orderTotal = orderContent.querySelector('.order p:nth-of-type(2)');
+const orderProducts = document.querySelector('.order-products-container');
+let closeIconOrders = document.querySelectorAll('.shopping-cart .close-icon');
+closeIconOrders = Array.from(closeIconOrders);
+closeIconOrders.forEach((e) => {
+  e.addEventListener('click', function (e) {
+    console.log(e.target.getAttribute('index'));
+  });
+});
+
+//Hide menus on outside clicks
+document.onclick = function (e) {
+  console.log(e.target);
+  if (!mobileMenu.contains(e.target) && !burgerMenu.contains(e.target))
+    mobileMenu.classList.add('inactive');
+
+  if (!desktopMenu.contains(e.target) && !menuEmail.contains(e.target))
+    desktopMenu.classList.add('inactive');
+
+  if (
+    !myOrder.contains(e.target) &&
+    !cartIcon.contains(e.target) &&
+    !closeIconOrders.contains(e.target)
+  )
+    myOrder.classList.add('inactive');
+};
+
+//Toggle menus on click
+function toggleDesktopMenu() {
+  desktopMenu.classList.toggle('inactive');
+}
+
+function toggleMobileMenu() {
+  mobileMenu.classList.toggle('inactive');
+}
+
+function toggleCartAside() {
+  myOrder.classList.toggle('inactive');
+}
+//Render products on page
 function renderProducts(arr) {
   for (product of arr) {
     console.log();
@@ -97,18 +129,7 @@ function renderProducts(arr) {
     //https://developer.mozilla.org/en-US/docs/Web/API/Element/append
   }
 }
-
-renderProducts(productList);
-
-//Click to product cart icon
-let cartList = [];
-
-let productInfoCart = document.querySelectorAll('.product-info figure');
-productInfoCart = Array.from(productInfoCart);
-productInfoCart.forEach((e) => {
-  e.addEventListener('click', changeCartList);
-});
-
+//Change cartlist on product cart icon click
 function changeCartList() {
   let iconImage = this.querySelector('.product-info figure img');
   imageSrc = iconImage.getAttribute('src');
@@ -122,22 +143,11 @@ function changeCartList() {
     cartList.push(product);
     addProductOrder(product, cartList.length - 1);
   } else {
-    iconImage.setAttribute('src', './icons/bt_add_to_cart.svg');
-    removeProductOrder(product.price, cartList.indexOf(product));
+    removeProductOrder(product, cartList.indexOf(product));
     cartList.splice(cartList.indexOf(product), 1);
   }
 }
-renderOrderContent(cartList);
-const orderTotal = orderContent.querySelector('.order p:nth-of-type(2)');
-const orderProducts = document.querySelector('.order-products-container');
-let closeIconOrder = document.querySelectorAll('.shopping-cart .close-icon');
-closeIconOrder = Array.from(closeIconOrder);
-closeIconOrder.forEach((e) => {
-  e.addEventListener('click', function (e) {
-    console.log(this.target.getAttribute('index'));
-  });
-});
-
+//My order
 function renderOrderContent(arr) {
   let sum = 0.0;
   for (product of arr) {
@@ -221,13 +231,22 @@ function addProductOrder(product, index) {
 
   let curr = parseFloat(orderTotal.innerText.replace('$', ''));
   orderTotal.innerText = '$' + (curr + product.price).toFixed(2);
+
+  closeIconOrders.push(closeIcon);
+  closeIconOrders[closeIconOrders.length - 1].addEventListener(
+    'click',
+    function (e) {
+      removeProductOrder(product, e.target.getAttribute('index'));
+    }
+  );
 }
 
-function removeProductOrder(productPrice, index) {
+function removeProductOrder(product, index) {
   let orderProductList = document.querySelectorAll('.shopping-cart');
   orderProductList = Array.from(orderProductList);
   let productToRemove;
   let i = 0;
+  console.log(index);
   for (p of orderProductList) {
     i++;
     if (index == p.getAttribute('index')) {
@@ -237,12 +256,26 @@ function removeProductOrder(productPrice, index) {
   }
   orderProducts.removeChild(productToRemove);
   let curr = parseFloat(orderTotal.innerText.replace('$', ''));
-  console.log(curr + ' - ' + productPrice);
-  orderTotal.innerText = '$' + (curr - productPrice).toFixed(2);
+  // console.log(curr + ' - ' + productPrice);
+  orderTotal.innerText = '$' + (curr - product.price).toFixed(2);
 
   //Updates index for the other product after the removed one
   for (i; i < orderProductList.length; i++) {
     orderProductList[i].setAttribute('index', i - 1);
+    orderProductList[i]
+      .querySelector('.close-icon')
+      .setAttribute('index', i - 1);
+  }
+
+  let availableProductsList = document.querySelectorAll(
+    '.product-info figure img'
+  );
+  availableProductsList = Array.from(availableProductsList);
+  for (p of availableProductsList) {
+    let ix = p.getAttribute('index');
+    if (productList[ix] === product) {
+      p.setAttribute('src', './icons/bt_add_to_cart.svg');
+    }
   }
 }
 
