@@ -3,6 +3,9 @@ const burgerMenu = document.querySelector('.menu');
 const cartIcon = document.querySelector('.navbar-shopping-cart');
 const cardsContainer = document.querySelector('.cards-container');
 const orderContent = document.querySelector('.my-order-content');
+const shoppingCartNumber = document.querySelector(
+  '.navbar-shopping-cart__number'
+);
 //Deploys
 const desktopMenu = document.querySelector('.desktop-menu');
 const mobileMenu = document.querySelector('.mobile-menu');
@@ -40,6 +43,20 @@ productList.push({
   price: 149.99,
   image:
     'https://w0.peakpx.com/wallpaper/192/766/HD-wallpaper-new-elden-ring-malenia.jpg',
+});
+
+productList.push({
+  name: 'Botella',
+  price: 15.99,
+  image:
+    'https://cdn.shopify.com/s/files/1/1821/3729/products/DG4_1200x1200_crop_center.jpg?v=1680936553ttps://w0.peakpx.com/wallpaper/192/766/HD-wallpaper-new-elden-ring-malenia.jpg',
+});
+
+productList.push({
+  name: 'New Balance 550 - Green',
+  price: 100.0,
+  image:
+    'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
 });
 
 renderProducts(productList);
@@ -133,7 +150,6 @@ function renderProducts(arr) {
 function changeCartList() {
   let iconImage = this.querySelector('.product-info figure img');
   imageSrc = iconImage.getAttribute('src');
-  console.log(cartList.length);
   let index = this.querySelector('.product-info figure img').getAttribute(
     'index'
   );
@@ -195,6 +211,7 @@ function renderOrderContent(arr) {
   checkoutBtn.classList.add('primary-button');
   checkoutBtn.innerText = 'Checkout';
 
+  shoppingCartNumber.innerText = arr.length;
   orderContent.append(order, checkoutBtn);
 }
 
@@ -238,6 +255,8 @@ function addProductOrder(product, index) {
       removeProductOrder(product, e.target.getAttribute('index'));
     }
   );
+
+  shoppingCartNumber.innerText = cartList.length;
 }
 
 function removeProductOrder(product, index) {
@@ -277,6 +296,7 @@ function removeProductOrder(product, index) {
     }
   }
   cartList.splice(index, 1);
+  shoppingCartNumber.innerText = cartList.length;
 }
 
 //Media querie to display menu
