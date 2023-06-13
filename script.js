@@ -67,7 +67,6 @@ closeIconOrders.forEach((e) => {
 
 //Hide menus on outside clicks
 document.onclick = function (e) {
-  console.log(e.target);
   if (!mobileMenu.contains(e.target) && !burgerMenu.contains(e.target))
     mobileMenu.classList.add('inactive');
 
@@ -77,7 +76,7 @@ document.onclick = function (e) {
   if (
     !myOrder.contains(e.target) &&
     !cartIcon.contains(e.target) &&
-    !closeIconOrders.contains(e.target)
+    !e.target.classList.contains('close-icon')
   )
     myOrder.classList.add('inactive');
 };
