@@ -9,7 +9,11 @@ const shoppingCartNumber = document.querySelector(
 //Deploys
 const desktopMenu = document.querySelector('.desktop-menu');
 const mobileMenu = document.querySelector('.mobile-menu');
-const myOrder = document.querySelector('.product-detail');
+const myOrder = document.querySelector('.order-detail');
+const productDetailContainer = document.querySelector('.product-detail');
+const productDetailContainerClose = document.querySelector(
+  '.product-detail-close'
+);
 //Media Query
 const mediaQuery = window.matchMedia('(min-width: 640px)');
 
@@ -17,6 +21,10 @@ const mediaQuery = window.matchMedia('(min-width: 640px)');
 menuEmail.addEventListener('click', toggleDesktopMenu);
 burgerMenu.addEventListener('click', toggleMobileMenu);
 cartIcon.addEventListener('click', toggleCartAside);
+productDetailContainerClose.addEventListener(
+  'click',
+  hideProductDetailContainer
+);
 
 //Listener to check mediaQuery
 menuDisplay(mediaQuery); //Initial check
@@ -24,64 +32,20 @@ mediaQuery.addListener(menuDisplay); // Attach listener function on state change
 
 //Product DB List
 const productList = [];
-productList.push({
-  name: 'Spiderman vs Spot',
-  price: 80.5,
-  image:
-    'https://media.wired.com/photos/64790f5a0b67c709cbcaa9b5/master/w_2560%2Cc_limit/Spider-Man-Across-The-Spider-Verse-Monitor-Culture.jpg',
-});
 
-productList.push({
-  name: 'Spiderman 2099',
-  price: 109.99,
-  image:
-    'https://cdn.vox-cdn.com/thumbor/VDA2iBI8Wjt1eXhoRfR0lBkx1Pc=/0x0:1914x794/1200x800/filters:focal(834x121:1140x427)/cdn.vox-cdn.com/uploads/chorus_image/image/72147618/image_2023_04_04_145646954.0.png',
-});
-
-productList.push({
-  name: 'Malenia',
-  price: 149.99,
-  image:
-    'https://w0.peakpx.com/wallpaper/192/766/HD-wallpaper-new-elden-ring-malenia.jpg',
-});
-
-productList.push({
-  name: 'Botella',
-  price: 15.99,
-  image:
-    'https://cdn.shopify.com/s/files/1/1821/3729/products/DG4_1200x1200_crop_center.jpg?v=1680936553ttps://w0.peakpx.com/wallpaper/192/766/HD-wallpaper-new-elden-ring-malenia.jpg',
-});
-
-productList.push({
-  name: 'New Balance 550 - Green',
-  price: 100.0,
-  image:
-    'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
-});
-
+setProductList(productList);
 renderProducts(productList);
+
+let productCards = document.querySelectorAll('.product-card');
+productCards = Array.from(productCards);
 
 //Click to product cart icon
 let cartList = [];
-
-let productInfoCart = document.querySelectorAll('.product-info figure');
-productInfoCart = Array.from(productInfoCart);
-productInfoCart.forEach((e) => {
-  e.addEventListener('click', changeCartList);
-});
 
 //Order content
 renderOrderContent(cartList);
 const orderTotal = orderContent.querySelector('.order p:nth-of-type(2)');
 const orderProducts = document.querySelector('.order-products-container');
-let closeIconOrders = document.querySelectorAll('.shopping-cart .close-icon');
-closeIconOrders = Array.from(closeIconOrders);
-closeIconOrders.forEach((e) => {
-  e.addEventListener('click', function (e) {
-    let ix = e.target.getAttribute('index');
-    removeProductOrder(cartList[ix], ix);
-  });
-});
 
 //Hide menus on outside clicks
 document.onclick = function (e) {
@@ -97,6 +61,16 @@ document.onclick = function (e) {
     !e.target.classList.contains('close-icon')
   )
     myOrder.classList.add('inactive');
+
+  let flag = false;
+  for (pCard of productCards) {
+    if (pCard.contains(e.target)) {
+      flag = true;
+      break;
+    }
+  }
+  if (!productDetailContainer.contains(e.target) && !flag)
+    productDetailContainer.classList.add('inactive');
 };
 
 //Toggle menus on click
@@ -111,12 +85,63 @@ function toggleMobileMenu() {
 function toggleCartAside() {
   myOrder.classList.toggle('inactive');
 }
+function hideProductDetailContainer() {
+  productDetailContainer.classList.add('inactive');
+}
+//Set product List
+function setProductList(arr) {
+  //'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny
+  arr.push({
+    name: 'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny',
+    price: 160,
+    image:
+      'https://cdn.shopify.com/s/files/1/2031/6995/articles/629728_2048x.jpg?v=1670425199://media.gq.com.mx/photos/643daf83730abff2c7881920/master/pass/tenis-adidas-campus-x-bad-bunny-wild-moss-verdes-caracteristicas-fecha-de-lanzamiento.png',
+    description:
+      'Cream white, light grey, calf leather, calf suede, 3-Stripes signature detail, round toe, lace-up front closure, logo patch at tongue, hook and loop front closure, logo insole and sole rubber. These styles are supplied by a tennis marketplace, which offers the most coveted and difficult to find items from around the world.',
+  });
+  //Air Jordan 1 Mid SE Craft
+  arr.push({
+    name: 'Air Jordan 1 Mid SE Craft',
+    price: 135,
+    image:
+      'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/44239991-a986-4c5f-a871-4f20a0c756d4/calzado-air-jordan-1-mid-se-craft-wJLJQs.png',
+    description:
+      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
+  });
+  //Adidas Tenis ADI2000
+  arr.push({
+    name: 'Adidas Tenis ADI2000',
+    price: 89.9,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/658ac4f70f144c3ca036ae6f0116ec80_9366/Tenis_adi2000_Blanco_GV9544_04_standard.jpg',
+    description:
+      'Show your rebellious side in the adi2000 shoes, inspired by the bold era of the early 2000s. With skate DNA and a versatile color palette, these adidas shoes were designed with your unique style in mind. An updated 3-Stripes design adds a playful touch, while the leather upper and rubber outsole ensure comfort.',
+  });
+  //Bottle
+  arr.push({
+    name: 'Bottle',
+    price: 15.99,
+    image:
+      'https://cdn.shopify.com/s/files/1/1821/3729/products/DG4_1200x1200_crop_center.jpg?v=1680936553ttps://w0.peakpx.com/wallpaper/192/766/HD-wallpaper-new-elden-ring-malenia.jpg',
+    description: 'Bottle',
+  });
+  //New Balance 550 - BeigeGreen
+  arr.push({
+    name: 'New Balance 550 - BeigeGreen',
+    price: 100.0,
+    image:
+      'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
+    description:
+      'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
+  });
+}
 //Render products on page
 function renderProducts(arr) {
   for (product of arr) {
     console.log();
     const productCard = document.createElement('div');
     productCard.classList.add('product-card');
+    productCard.setAttribute('index', arr.indexOf(product));
 
     const productImg = document.createElement('img');
     productImg.setAttribute('src', product.image);
@@ -133,19 +158,55 @@ function renderProducts(arr) {
     productInfoDiv.append(productPrice, productName);
 
     const productInfoFigure = document.createElement('figure');
-    const productCartIcon = document.createElement('img');
-    productCartIcon.setAttribute('src', './icons/bt_add_to_cart.svg');
-    productInfoFigure.appendChild(productCartIcon);
-    productCartIcon.setAttribute('index', arr.indexOf(product));
+    const productCardIcon = document.createElement('img');
+    productCardIcon.setAttribute('src', './icons/bt_add_to_cart.svg');
+    productInfoFigure.appendChild(productCardIcon);
+    productCardIcon.setAttribute('index', arr.indexOf(product));
 
     productInfo.append(productInfoDiv, productInfoFigure);
+    productInfoFigure.addEventListener('click', changeCartList);
     productCard.append(productImg, productInfo);
-
+    productCard.addEventListener('click', (e) => {
+      openProductDetail(e);
+    });
     cardsContainer.appendChild(productCard);
     //Differences between append and appendChild on:
     //https://developer.mozilla.org/en-US/docs/Web/API/Element/append
   }
 }
+//Open product Details
+function openProductDetail(e) {
+  let srcTarget = e.target.getAttribute('src');
+  if (
+    srcTarget === './icons/bt_add_to_cart.svg' ||
+    srcTarget === './icons/bt_added_to_cart.svg'
+  ) {
+    return;
+  }
+  let productSelected;
+  for (pCard of productCards) {
+    if (pCard.contains(e.target)) {
+      productSelected = productList[pCard.getAttribute('index')];
+      break;
+    }
+  }
+
+  let imgs = productDetailContainer.getElementsByTagName('img');
+  const productImg = imgs[1];
+  productImg.setAttribute('src', productSelected.image);
+
+  const productPrice = productDetailContainer.querySelector('p:nth-of-type(1)');
+  productPrice.innerText = '$' + productSelected.price.toFixed(2);
+
+  const productName = productDetailContainer.querySelector('p:nth-of-type(2)');
+  productName.innerText = productSelected.name;
+
+  const productDesc = productDetailContainer.querySelector('p:nth-of-type(3)');
+  productDesc.innerText = productSelected.description;
+
+  productDetailContainer.classList.remove('inactive');
+}
+
 //Change cartlist on product cart icon click
 function changeCartList() {
   let iconImage = this.querySelector('.product-info figure img');
@@ -193,6 +254,10 @@ function renderOrderContent(arr) {
       closeIcon
     );
     sum += product.price;
+    shoppingProduct.addEventListener('click', function (e) {
+      let ix = e.target.getAttribute('index');
+      removeProductOrder(cartList[ix], ix);
+    });
     orderProducts.append(shoppingProduct);
   }
   const order = document.createElement('div');
@@ -243,18 +308,14 @@ function addProductOrder(product, index) {
     productPrice,
     closeIcon
   );
+  shoppingProduct.addEventListener('click', function (e) {
+    let ix = e.target.getAttribute('index');
+    removeProductOrder(cartList[ix], ix);
+  });
   orderProducts.append(shoppingProduct);
 
   let curr = parseFloat(orderTotal.innerText.replace('$', ''));
   orderTotal.innerText = '$' + (curr + product.price).toFixed(2);
-
-  closeIconOrders.push(closeIcon);
-  closeIconOrders[closeIconOrders.length - 1].addEventListener(
-    'click',
-    function (e) {
-      removeProductOrder(product, e.target.getAttribute('index'));
-    }
-  );
 
   shoppingCartNumber.innerText = cartList.length;
 }
@@ -265,7 +326,6 @@ function removeProductOrder(product, index) {
   let productToRemove;
   let i = 0;
   for (p of orderProductList) {
-    // console.log(p);
     i++;
     if (index == p.getAttribute('index')) {
       productToRemove = p;
