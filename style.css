@@ -179,6 +179,8 @@ nav {
   position: absolute;
   right: 0;
   z-index: 10;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 /* My order */
@@ -260,6 +262,7 @@ nav {
   font-weight: bold;
   height: 50px;
   transition: transform 0.2s;
+  margin-bottom: 20px;
 }
 .primary-button:hover {
   /* background-color: var(--white);

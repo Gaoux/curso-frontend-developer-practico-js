@@ -2,7 +2,9 @@ const menuEmail = document.querySelector('.navbar-email');
 const burgerMenu = document.querySelector('.menu');
 const cartIcon = document.querySelector('.navbar-shopping-cart');
 const cardsContainer = document.querySelector('.cards-container');
+const orderContent = document.querySelector('.my-order-content');
 const desktopMenu = document.querySelector('.desktop-menu');
+
 const mobileMenu = document.querySelector('.mobile-menu');
 const myOrder = document.querySelector('.product-detail');
 const mediaQuery = window.matchMedia('(min-width: 640px)');
@@ -70,8 +72,8 @@ productList.push({
     'https://w0.peakpx.com/wallpaper/192/766/HD-wallpaper-new-elden-ring-malenia.jpg',
 });
 
-function renderProduct(list) {
-  for (product of list) {
+function renderProducts(arr) {
+  for (product of arr) {
     console.log();
     const productCard = document.createElement('div');
     productCard.classList.add('product-card');
@@ -94,6 +96,7 @@ function renderProduct(list) {
     const productCartIcon = document.createElement('img');
     productCartIcon.setAttribute('src', './icons/bt_add_to_cart.svg');
     productInfoFigure.appendChild(productCartIcon);
+    productCartIcon.setAttribute('index', arr.indexOf(product));
 
     productInfo.append(productInfoDiv, productInfoFigure);
     productCard.append(productImg, productInfo);
@@ -104,18 +107,133 @@ function renderProduct(list) {
   }
 }
 
-renderProduct(productList);
+renderProducts(productList);
 
-//Change add to cart icon / Start page
+//Click to product cart icon
+let cartList = [];
+
 let productInfoCart = document.querySelectorAll('.product-info figure');
 productInfoCart = Array.from(productInfoCart);
 productInfoCart.forEach((e) => {
-  e.addEventListener('click', changeShoppingStatus);
+  e.addEventListener('click', changeCartList);
 });
-function changeShoppingStatus() {
+
+function changeCartList() {
   let iconImage = this.querySelector('.product-info figure img');
   imageSrc = iconImage.getAttribute('src');
-  if (imageSrc !== './icons/bt_added_to_cart.svg')
+
+  let index = this.querySelector('.product-info figure img').getAttribute(
+    'index'
+  );
+  let product = productList[index];
+  if (imageSrc !== './icons/bt_added_to_cart.svg') {
     iconImage.setAttribute('src', './icons/bt_added_to_cart.svg');
-  else iconImage.setAttribute('src', './icons/bt_add_to_cart.svg');
+    cartList.push([product]);
+    addProductOrder(product, cartList.length - 1);
+  } else {
+    iconImage.setAttribute('src', './icons/bt_add_to_cart.svg');
+    cartList.splice(cartList.indexOf(product), 1);
+    removeProductOrder(product.price);
+  }
+}
+renderOrderContent(cartList);
+const orderTotal = orderContent.querySelector('.order p:nth-of-type(2)');
+const orderProducts = document.querySelector('.order-products-container');
+
+function renderOrderContent(arr) {
+  let sum = 0.0;
+  for (product of arr) {
+    const shoppingProduct = document.createElement('div');
+    shoppingProduct.classList.add('shopping-cart');
+    shoppingProduct.setAttribute('index', arr.indexOf(product));
+
+    const shoppingProductFig = document.createElement('figure');
+    const productImg = document.createElement('img');
+    productImg.setAttribute('src', product.image);
+
+    const productName = document.createElement('p');
+    const productPrice = document.createElement('p');
+
+    productName.innerText = product.name;
+    productPrice.innerText = '$' + product.price;
+    shoppingProductFig.append(productName, productPrice);
+
+    const closeIcon = document.createElement('img');
+    closeIcon.classList.add('close-icon');
+    closeIcon.setAttribute('src', './icons/icon_close.png');
+
+    shoppingProduct.append(
+      shoppingProductFig,
+      productName,
+      productPrice,
+      closeIcon
+    );
+    sum += product.price;
+    orderProducts.append(shoppingProduct);
+  }
+  const order = document.createElement('div');
+  order.classList.add('order');
+  const totalP = document.createElement('p');
+  const totalSpan = document.createElement('span');
+  totalSpan.innerText = 'Total';
+  totalP.append(totalSpan);
+
+  const totalN = document.createElement('p');
+  totalN.innerText = sum;
+
+  order.append(totalP, totalN);
+
+  const checkoutBtn = document.createElement('button');
+  checkoutBtn.classList.add('primary-button');
+  checkoutBtn.innerText = 'Checkout';
+
+  orderContent.append(order, checkoutBtn);
+}
+
+function addProductOrder(product, index) {
+  const shoppingProduct = document.createElement('div');
+  shoppingProduct.classList.add('shopping-cart');
+  shoppingProduct.setAttribute('index', index);
+
+  const shoppingProductFig = document.createElement('figure');
+  const productImg = document.createElement('img');
+  productImg.setAttribute('src', product.image);
+  shoppingProductFig.append(productImg);
+
+  const productName = document.createElement('p');
+  const productPrice = document.createElement('p');
+
+  productName.innerText = product.name;
+  productPrice.innerText = '$' + product.price;
+  shoppingProduct.append(productName, productPrice);
+
+  const closeIcon = document.createElement('img');
+  closeIcon.classList.add('close-icon');
+  closeIcon.setAttribute('src', './icons/icon_close.png');
+
+  shoppingProduct.append(
+    shoppingProductFig,
+    productName,
+    productPrice,
+    closeIcon
+  );
+  orderProducts.append(shoppingProduct);
+
+  let curr = parseFloat(orderTotal.innerText.replace('$', ''));
+  orderTotal.innerText = '$' + (curr + product.price);
+}
+
+function removeProductOrder(productPrice) {
+  let orderProductList = document.querySelectorAll('.shopping-cart');
+  orderProductList = Array.from(orderProductList);
+  let productToRemove;
+  for (i in orderProductList) {
+    if (i === orderProductList[i].getAttribute('index')) {
+      productToRemove = orderProductList[i];
+    }
+  }
+  console.log(productToRemove);
+  orderProducts.removeChild(productToRemove);
+  let curr = parseFloat(orderTotal.innerText.replace('$', ''));
+  orderTotal.innerText = '$' + (curr - productPrice);
 }
