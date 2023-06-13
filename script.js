@@ -105,3 +105,17 @@ function renderProduct(list) {
 }
 
 renderProduct(productList);
+
+//Change add to cart icon / Start page
+let productInfoCart = document.querySelectorAll('.product-info figure');
+productInfoCart = Array.from(productInfoCart);
+productInfoCart.forEach((e) => {
+  e.addEventListener('click', changeShoppingStatus);
+});
+function changeShoppingStatus() {
+  let iconImage = this.querySelector('.product-info figure img');
+  imageSrc = iconImage.getAttribute('src');
+  if (imageSrc !== './icons/bt_added_to_cart.svg')
+    iconImage.setAttribute('src', './icons/bt_added_to_cart.svg');
+  else iconImage.setAttribute('src', './icons/bt_add_to_cart.svg');
+}
