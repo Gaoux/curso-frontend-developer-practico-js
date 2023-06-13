@@ -61,7 +61,8 @@ let closeIconOrders = document.querySelectorAll('.shopping-cart .close-icon');
 closeIconOrders = Array.from(closeIconOrders);
 closeIconOrders.forEach((e) => {
   e.addEventListener('click', function (e) {
-    console.log(e.target.getAttribute('index'));
+    let ix = e.target.getAttribute('index');
+    removeProductOrder(cartList[ix], ix);
   });
 });
 
@@ -132,7 +133,7 @@ function renderProducts(arr) {
 function changeCartList() {
   let iconImage = this.querySelector('.product-info figure img');
   imageSrc = iconImage.getAttribute('src');
-
+  console.log(cartList.length);
   let index = this.querySelector('.product-info figure img').getAttribute(
     'index'
   );
@@ -143,7 +144,6 @@ function changeCartList() {
     addProductOrder(product, cartList.length - 1);
   } else {
     removeProductOrder(product, cartList.indexOf(product));
-    cartList.splice(cartList.indexOf(product), 1);
   }
 }
 //My order
@@ -245,8 +245,8 @@ function removeProductOrder(product, index) {
   orderProductList = Array.from(orderProductList);
   let productToRemove;
   let i = 0;
-  console.log(index);
   for (p of orderProductList) {
+    // console.log(p);
     i++;
     if (index == p.getAttribute('index')) {
       productToRemove = p;
@@ -276,6 +276,7 @@ function removeProductOrder(product, index) {
       p.setAttribute('src', './icons/bt_add_to_cart.svg');
     }
   }
+  cartList.splice(index, 1);
 }
 
 //Media querie to display menu
