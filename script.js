@@ -44,16 +44,10 @@ function toggleCartAside() {
   myOrder.classList.toggle('inactive');
 }
 
-//Media querie to display menu
-function menuDisplay(mediaQuery) {
-  if (mediaQuery.matches) mobileMenu.classList.add('inactive');
-  else desktopMenu.classList.add('inactive');
-}
-
 const productList = [];
 productList.push({
   name: 'Spiderman vs Spot',
-  price: 80.0,
+  price: 80.5,
   image:
     'https://media.wired.com/photos/64790f5a0b67c709cbcaa9b5/master/w_2560%2Cc_limit/Spider-Man-Across-The-Spider-Verse-Monitor-Culture.jpg',
 });
@@ -88,7 +82,7 @@ function renderProducts(arr) {
     const productPrice = document.createElement('p');
     const productName = document.createElement('p');
 
-    productPrice.innerText = '$' + product.price;
+    productPrice.innerText = '$' + product.price.toFixed(2);
     productName.innerText = product.name;
     productInfoDiv.append(productPrice, productName);
 
@@ -128,12 +122,12 @@ function changeCartList() {
   let product = productList[index];
   if (imageSrc !== './icons/bt_added_to_cart.svg') {
     iconImage.setAttribute('src', './icons/bt_added_to_cart.svg');
-    cartList.push([product]);
+    cartList.push(product);
     addProductOrder(product, cartList.length - 1);
   } else {
     iconImage.setAttribute('src', './icons/bt_add_to_cart.svg');
+    removeProductOrder(product.price, cartList.indexOf(product));
     cartList.splice(cartList.indexOf(product), 1);
-    removeProductOrder(product.price);
   }
 }
 renderOrderContent(cartList);
@@ -155,7 +149,7 @@ function renderOrderContent(arr) {
     const productPrice = document.createElement('p');
 
     productName.innerText = product.name;
-    productPrice.innerText = '$' + product.price;
+    productPrice.innerText = '$' + product.price.toFixed(2);
     shoppingProductFig.append(productName, productPrice);
 
     const closeIcon = document.createElement('img');
@@ -220,20 +214,34 @@ function addProductOrder(product, index) {
   orderProducts.append(shoppingProduct);
 
   let curr = parseFloat(orderTotal.innerText.replace('$', ''));
-  orderTotal.innerText = '$' + (curr + product.price);
+  orderTotal.innerText = '$' + (curr + product.price).toFixed(2);
 }
 
-function removeProductOrder(productPrice) {
+function removeProductOrder(productPrice, index) {
   let orderProductList = document.querySelectorAll('.shopping-cart');
   orderProductList = Array.from(orderProductList);
   let productToRemove;
-  for (i in orderProductList) {
-    if (i === orderProductList[i].getAttribute('index')) {
-      productToRemove = orderProductList[i];
+  let i = 0;
+  for (p of orderProductList) {
+    i++;
+    if (index == p.getAttribute('index')) {
+      productToRemove = p;
+      break;
     }
   }
-  console.log(productToRemove);
   orderProducts.removeChild(productToRemove);
   let curr = parseFloat(orderTotal.innerText.replace('$', ''));
-  orderTotal.innerText = '$' + (curr - productPrice);
+  console.log(curr + ' - ' + productPrice);
+  orderTotal.innerText = '$' + (curr - productPrice).toFixed(2);
+
+  //Updates index for the other product after the removed one
+  for (i; i < orderProductList.length; i++) {
+    orderProductList[i].setAttribute('index', i - 1);
+  }
+}
+
+//Media querie to display menu
+function menuDisplay(mediaQuery) {
+  if (mediaQuery.matches) mobileMenu.classList.add('inactive');
+  else desktopMenu.classList.add('inactive');
 }
