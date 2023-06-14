@@ -1,3 +1,21 @@
+//VARIABLES
+//Account info
+let accountList = [];
+let currAccount = {};
+//Products
+//Product DB List
+const productList = [];
+//Order
+let cartList = [];
+
+//INITIALIZE PAGE
+addAccount();
+setProductList(productList);
+renderProducts(productList);
+//Order content
+renderOrderContent(cartList);
+//HTML ELEMENTS
+//
 const menuEmail = document.querySelector('.navbar-email');
 const burgerMenu = document.querySelector('.menu');
 const cartIcon = document.querySelector('.navbar-shopping-cart');
@@ -15,9 +33,23 @@ const productDetailContainer = document.querySelector('.product-detail');
 const productDetailContainerClose = document.querySelector(
   '.product-detail-close'
 );
+//Product Cards
+const productCards = Array.from(document.querySelectorAll('.product-card'));
+//Order deploy
+const orderTotal = orderContent.querySelector('.order p:nth-of-type(2)');
+const orderProducts = document.querySelector('.order-products-container');
+//Login page
+const form = document.querySelector('.form');
+const loginSubmit = document.querySelector('#loginSubmit');
+const loginEmail = document.querySelector('#loginEmail');
+const invalidEmailAlert = document.querySelector('#invalidEmailAlert');
+const IncorrectEmailOrPassword = document.querySelector(
+  '#IncorrectEmailOrPassword'
+);
 //Media Query
 const mediaQuery = window.matchMedia('(min-width: 640px)');
 
+//EVENT LISTENERS
 //Click event listener to toggle visibility of menus
 menuEmail.addEventListener('click', toggleDesktopMenu);
 burgerMenu.addEventListener('click', toggleMobileMenu);
@@ -26,28 +58,14 @@ productDetailContainerClose.addEventListener(
   'click',
   hideProductDetailContainer
 );
-
+//Login
+form.addEventListener('submit', checkLogin);
+loginEmail.addEventListener('input', function (e) {
+  checkEmail(this.value);
+});
 //Listener to check mediaQuery
 menuDisplay(mediaQuery); //Initial check
 mediaQuery.addListener(menuDisplay); // Attach listener function on state changes
-
-//Product DB List
-const productList = [];
-
-setProductList(productList);
-renderProducts(productList);
-
-let productCards = document.querySelectorAll('.product-card');
-productCards = Array.from(productCards);
-
-//Click to product cart icon
-let cartList = [];
-
-//Order content
-renderOrderContent(cartList);
-const orderTotal = orderContent.querySelector('.order p:nth-of-type(2)');
-const orderProducts = document.querySelector('.order-products-container');
-
 //Hide menus on outside clicks
 document.onclick = function (e) {
   if (!mobileMenu.contains(e.target) && !burgerMenu.contains(e.target))
@@ -74,6 +92,7 @@ document.onclick = function (e) {
     productDetailContainer.classList.add('inactive');
 };
 
+//FUNCTIONS
 //Toggle menus on click
 function toggleDesktopMenu() {
   desktopMenu.classList.toggle('inactive');
@@ -289,7 +308,6 @@ function renderOrderContent(arr) {
   shoppingCartNumber.innerText = arr.length;
   orderContent.append(order, checkoutBtn);
 }
-
 function addProductOrder(product, index) {
   const shoppingProduct = document.createElement('div');
   shoppingProduct.classList.add('shopping-cart');
@@ -329,7 +347,6 @@ function addProductOrder(product, index) {
 
   shoppingCartNumber.innerText = cartList.length;
 }
-
 function removeProductOrder(product, index) {
   let orderProductList = document.querySelectorAll('.shopping-cart');
   orderProductList = Array.from(orderProductList);
@@ -367,6 +384,47 @@ function removeProductOrder(product, index) {
   }
   cartList.splice(index, 1);
   shoppingCartNumber.innerText = cartList.length;
+}
+
+//Login
+function checkLogin() {
+  event.preventDefault();
+  let email = document.querySelector('#loginEmail');
+  email = email.value;
+  if (!checkEmail(email)) {
+    IncorrectEmailOrPassword.classList.add('inactive');
+    return;
+  }
+  let password = document.querySelector('#loginPassword');
+  password = password.value;
+
+  for (acc of accountList)
+    if (acc.email === email && acc.password === password) {
+      currAccount = acc;
+      IncorrectEmailOrPassword.classList.add('inactive');
+      window.open('./index.html');
+      currAccount = acc;
+      menuEmail.innerText = acc.email;
+      return;
+    }
+
+  IncorrectEmailOrPassword.classList.remove('inactive');
+}
+//Sign up
+function addAccount() {
+  accountList.push({
+    name: 'Gustavo Parra',
+    email: 'gus@example.com',
+    password: '1234',
+  });
+}
+//Check email
+function checkEmail(email) {
+  const regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+  let validEmail = regex.test(email);
+  if (!validEmail) invalidEmailAlert.classList.remove('inactive');
+  else invalidEmailAlert.classList.add('inactive');
+  return validEmail;
 }
 
 //Media querie to display menu
