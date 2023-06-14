@@ -6,6 +6,7 @@ const orderContent = document.querySelector('.my-order-content');
 const shoppingCartNumber = document.querySelector(
   '.navbar-shopping-cart__number'
 );
+
 //Deploys
 const desktopMenu = document.querySelector('.desktop-menu');
 const mobileMenu = document.querySelector('.mobile-menu');
