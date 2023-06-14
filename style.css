@@ -17,11 +17,6 @@
   display: block;
   left: -200px;
 }
-.product-detail.inactive {
-  display: block;
-  right: -1300px;
-}
-
 body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
@@ -338,7 +333,6 @@ nav {
   background: var(--white);
   width: 360px;
   position: absolute;
-  right: 0;
   padding-bottom: 24px;
   /* padding: 0 5px 24px 5px; */
   border: solid 1px var(--very-light-pink);
@@ -586,7 +580,12 @@ nav {
     height: 140px;
   }
   .product-detail {
+    right: 0;
     width: 100%;
+  }
+  .product-detail.inactive {
+    display: block;
+    right: -1300px;
   }
   .logo {
     display: block;
