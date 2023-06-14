@@ -117,14 +117,6 @@ function setProductList(arr) {
     description:
       'Show your rebellious side in the adi2000 shoes, inspired by the bold era of the early 2000s. With skate DNA and a versatile color palette, these adidas shoes were designed with your unique style in mind. An updated 3-Stripes design adds a playful touch, while the leather upper and rubber outsole ensure comfort.',
   });
-  //Bottle
-  arr.push({
-    name: 'Bottle',
-    price: 15.99,
-    image:
-      'https://cdn.shopify.com/s/files/1/1821/3729/products/DG4_1200x1200_crop_center.jpg?v=1680936553ttps://w0.peakpx.com/wallpaper/192/766/HD-wallpaper-new-elden-ring-malenia.jpg',
-    description: 'Bottle',
-  });
   //New Balance 550 - BeigeGreen
   arr.push({
     name: 'New Balance 550 - BeigeGreen',
@@ -134,11 +126,28 @@ function setProductList(arr) {
     description:
       'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
   });
+  // Adidas tenis Forum Mid - Cloud White
+  arr.push({
+    name: 'Adidas tenis Forum Mid - Cloud White',
+    price: 64.0,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/13085062e6fd497fb6faac5e00302b1b_9366/Tenis_Forum_Mid_Blanco_FY4975_01_standard.jpg',
+    description:
+      'Forum Mid is a new product for Unisex from adidas. We invite you to see the images to appreciate more details from different angles. If you already know Forum Mid S you can leave a review below; We always love to hear your opinion.',
+  });
+  // Adidas tenis Forum Low - Royal Blue
+  arr.push({
+    name: 'Adidas tenis Forum Low - Royal Blue',
+    price: 68.0,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg',
+    description:
+      'More than a shoe, it is a statement of style. The adidas Forum arrived on the scene in 84 and gained a following on the pitch and in the music world. Bringing back 80s attitude, the explosive energy of basketball, and the iconic X-shaped ankle design, this pair of classic sneakers. Distilled in a low-cut version designed for the streets.',
+  });
 }
 //Render products on page
 function renderProducts(arr) {
   for (product of arr) {
-    console.log();
     const productCard = document.createElement('div');
     productCard.classList.add('product-card');
     productCard.setAttribute('index', arr.indexOf(product));
