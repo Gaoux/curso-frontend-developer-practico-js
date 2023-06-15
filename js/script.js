@@ -17,11 +17,9 @@ const productDetailContainer = document.querySelector('.product-detail');
 const productDetailContainerClose = document.querySelector(
   '.product-detail-close'
 );
-
-//Order deploy
-const orderTotal = orderContent.querySelector('.order p:nth-of-type(2)');
-const orderProducts = document.querySelector('.order-products-container');
-
+const productDetailCartBtn = document.querySelector(
+  '.product-detail .add-to-cart-button'
+);
 //Media Query
 const mediaQuery = window.matchMedia('(min-width: 640px)');
 
@@ -34,7 +32,28 @@ productDetailContainerClose.addEventListener(
   'click',
   hideProductDetailContainer
 );
-
+productDetailCartBtn.addEventListener('click', function (e) {
+  let productIndex = e.target.getAttribute('index');
+  let text = e.target.innerText;
+  let productCard;
+  for (pCard of productCards) {
+    if (pCard.getAttribute('index') === productIndex) {
+      productCard = pCard;
+      break;
+    }
+  }
+  let product = productList[productIndex];
+  let productCartImg = productCard.querySelector('.product-info figure img');
+  if (text === 'Add to cart') {
+    setProductDetailBtnStyle(text === 'Add to cart');
+    productCartImg.setAttribute('src', './icons/bt_added_to_cart.svg');
+    addProductOrder(product, cartList.length);
+  } else {
+    setProductDetailBtnStyle(text === 'Add to cart');
+    productCartImg.setAttribute('src', './icons/bt_add_to_cart.svg');
+    removeProductOrder(product, cartList.indexOf(product));
+  }
+});
 //Listener to check mediaQuery
 menuDisplay(mediaQuery); //Initial check
 mediaQuery.addListener(menuDisplay); // Attach listener function on state changes
@@ -55,6 +74,9 @@ renderOrderContent(cartList);
 
 //Product Cards
 const productCards = Array.from(document.querySelectorAll('.product-card'));
+//Order deploy
+const orderTotal = orderContent.querySelector('.order p:nth-of-type(2)');
+const orderProducts = document.querySelector('.order-products-container');
 
 //Hide menus on outside clicks
 document.onclick = function (e) {
@@ -73,10 +95,20 @@ document.onclick = function (e) {
 
   let flag = false;
   for (pCard of productCards) {
-    if (pCard.contains(e.target)) {
+    if (
+      pCard.contains(e.target) &
+        (e.target.getAttribute('src') != './icons/bt_add_to_cart.svg') &&
+      e.target.getAttribute('src') != './icons/bt_added_to_cart.svg'
+    ) {
       flag = true;
       break;
     }
+  }
+  if (
+    e.target.getAttribute('src') === './icons/bt_add_to_cart.svg' ||
+    e.target.getAttribute('src') === './icons/bt_added_to_cart.svg'
+  ) {
+    productDetailContainer.classList.add('inactive');
   }
   if (!productDetailContainer.contains(e.target) && !flag)
     productDetailContainer.classList.add('inactive');
@@ -101,7 +133,7 @@ function hideProductDetailContainer() {
 function setProductList(arr) {
   //'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny
   arr.push({
-    name: 'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny',
+    name: 'Adidas tenis Forum Buckle Low "White" from adidas x Bad Bunny',
     price: 160,
     image:
       'https://cdn.shopify.com/s/files/1/2031/6995/articles/629728_2048x.jpg?v=1670425199://media.gq.com.mx/photos/643daf83730abff2c7881920/master/pass/tenis-adidas-campus-x-bad-bunny-wild-moss-verdes-caracteristicas-fecha-de-lanzamiento.png',
@@ -153,6 +185,170 @@ function setProductList(arr) {
     description:
       'More than a shoe, it is a statement of style. The adidas Forum arrived on the scene in 84 and gained a following on the pitch and in the music world. Bringing back 80s attitude, the explosive energy of basketball, and the iconic X-shaped ankle design, this pair of classic sneakers. Distilled in a low-cut version designed for the streets.',
   });
+
+  //Copy and paste from now on
+  //'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny
+  arr.push({
+    name: 'Adidas tenis Forum Buckle Low "White" from adidas x Bad Bunny 2',
+    price: 160,
+    image:
+      'https://cdn.shopify.com/s/files/1/2031/6995/articles/629728_2048x.jpg?v=1670425199://media.gq.com.mx/photos/643daf83730abff2c7881920/master/pass/tenis-adidas-campus-x-bad-bunny-wild-moss-verdes-caracteristicas-fecha-de-lanzamiento.png',
+    description:
+      'Cream white, light grey, calf leather, calf suede, 3-Stripes signature detail, round toe, lace-up front closure, logo patch at tongue, hook and loop front closure, logo insole and sole rubber. These styles are supplied by a tennis marketplace, which offers the most coveted and difficult to find items from around the world.',
+  });
+  //Air Jordan 1 Mid SE Craft
+  arr.push({
+    name: 'Air Jordan 1 Mid SE Craft 2',
+    price: 135,
+    image:
+      'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/44239991-a986-4c5f-a871-4f20a0c756d4/calzado-air-jordan-1-mid-se-craft-wJLJQs.png',
+    description:
+      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
+  });
+  //Adidas Tenis ADI2000
+  arr.push({
+    name: 'Adidas Tenis ADI2000 2',
+    price: 89.9,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/658ac4f70f144c3ca036ae6f0116ec80_9366/Tenis_adi2000_Blanco_GV9544_04_standard.jpg',
+    description:
+      'Show your rebellious side in the adi2000 shoes, inspired by the bold era of the early 2000s. With skate DNA and a versatile color palette, these adidas shoes were designed with your unique style in mind. An updated 3-Stripes design adds a playful touch, while the leather upper and rubber outsole ensure comfort.',
+  });
+  //New Balance 550 - BeigeGreen
+  arr.push({
+    name: 'New Balance 550 - BeigeGreen 2',
+    price: 100.0,
+    image:
+      'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
+    description:
+      'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
+  });
+  // Adidas tenis Forum Mid - Cloud White
+  arr.push({
+    name: 'Adidas tenis Forum Mid - Cloud White 2',
+    price: 64.0,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/13085062e6fd497fb6faac5e00302b1b_9366/Tenis_Forum_Mid_Blanco_FY4975_01_standard.jpg',
+    description:
+      'Forum Mid is a new product for Unisex from adidas. We invite you to see the images to appreciate more details from different angles. If you already know Forum Mid S you can leave a review below; We always love to hear your opinion.',
+  });
+  // Adidas tenis Forum Low - Royal Blue
+  arr.push({
+    name: 'Adidas tenis Forum Low - Royal Blue 2 ',
+    price: 68.0,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg',
+    description:
+      'More than a shoe, it is a statement of style. The adidas Forum arrived on the scene in 84 and gained a following on the pitch and in the music world. Bringing back 80s attitude, the explosive energy of basketball, and the iconic X-shaped ankle design, this pair of classic sneakers. Distilled in a low-cut version designed for the streets.',
+  });
+  //'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny
+  arr.push({
+    name: 'Adidas tenis Forum Buckle Low "White" from adidas x Bad Bunny 3',
+    price: 160,
+    image:
+      'https://cdn.shopify.com/s/files/1/2031/6995/articles/629728_2048x.jpg?v=1670425199://media.gq.com.mx/photos/643daf83730abff2c7881920/master/pass/tenis-adidas-campus-x-bad-bunny-wild-moss-verdes-caracteristicas-fecha-de-lanzamiento.png',
+    description:
+      'Cream white, light grey, calf leather, calf suede, 3-Stripes signature detail, round toe, lace-up front closure, logo patch at tongue, hook and loop front closure, logo insole and sole rubber. These styles are supplied by a tennis marketplace, which offers the most coveted and difficult to find items from around the world.',
+  });
+  //Air Jordan 1 Mid SE Craft
+  arr.push({
+    name: 'Air Jordan 1 Mid SE Craft 3',
+    price: 135,
+    image:
+      'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/44239991-a986-4c5f-a871-4f20a0c756d4/calzado-air-jordan-1-mid-se-craft-wJLJQs.png',
+    description:
+      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
+  });
+  //Adidas Tenis ADI2000
+  arr.push({
+    name: 'Adidas Tenis ADI2000 3',
+    price: 89.9,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/658ac4f70f144c3ca036ae6f0116ec80_9366/Tenis_adi2000_Blanco_GV9544_04_standard.jpg',
+    description:
+      'Show your rebellious side in the adi2000 shoes, inspired by the bold era of the early 2000s. With skate DNA and a versatile color palette, these adidas shoes were designed with your unique style in mind. An updated 3-Stripes design adds a playful touch, while the leather upper and rubber outsole ensure comfort.',
+  });
+  //New Balance 550 - BeigeGreen
+  arr.push({
+    name: 'New Balance 550 - BeigeGreen 3',
+    price: 100.0,
+    image:
+      'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
+    description:
+      'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
+  });
+  // Adidas tenis Forum Mid - Cloud White
+  arr.push({
+    name: 'Adidas tenis Forum Mid - Cloud White 3',
+    price: 64.0,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/13085062e6fd497fb6faac5e00302b1b_9366/Tenis_Forum_Mid_Blanco_FY4975_01_standard.jpg',
+    description:
+      'Forum Mid is a new product for Unisex from adidas. We invite you to see the images to appreciate more details from different angles. If you already know Forum Mid S you can leave a review below; We always love to hear your opinion.',
+  });
+  // Adidas tenis Forum Low - Royal Blue
+  arr.push({
+    name: 'Adidas tenis Forum Low - Royal Blue 3 ',
+    price: 68.0,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg',
+    description:
+      'More than a shoe, it is a statement of style. The adidas Forum arrived on the scene in 84 and gained a following on the pitch and in the music world. Bringing back 80s attitude, the explosive energy of basketball, and the iconic X-shaped ankle design, this pair of classic sneakers. Distilled in a low-cut version designed for the streets.',
+  });
+  //'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny
+  arr.push({
+    name: 'Adidas tenis Forum Buckle Low "White" from adidas x Bad Bunny 4',
+    price: 160,
+    image:
+      'https://cdn.shopify.com/s/files/1/2031/6995/articles/629728_2048x.jpg?v=1670425199://media.gq.com.mx/photos/643daf83730abff2c7881920/master/pass/tenis-adidas-campus-x-bad-bunny-wild-moss-verdes-caracteristicas-fecha-de-lanzamiento.png',
+    description:
+      'Cream white, light grey, calf leather, calf suede, 3-Stripes signature detail, round toe, lace-up front closure, logo patch at tongue, hook and loop front closure, logo insole and sole rubber. These styles are supplied by a tennis marketplace, which offers the most coveted and difficult to find items from around the world.',
+  });
+  //Air Jordan 1 Mid SE Craft
+  arr.push({
+    name: 'Air Jordan 1 Mid SE Craft 4',
+    price: 135,
+    image:
+      'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/44239991-a986-4c5f-a871-4f20a0c756d4/calzado-air-jordan-1-mid-se-craft-wJLJQs.png',
+    description:
+      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
+  });
+  //Adidas Tenis ADI2000
+  arr.push({
+    name: 'Adidas Tenis ADI2000 4',
+    price: 89.9,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/658ac4f70f144c3ca036ae6f0116ec80_9366/Tenis_adi2000_Blanco_GV9544_04_standard.jpg',
+    description:
+      'Show your rebellious side in the adi2000 shoes, inspired by the bold era of the early 2000s. With skate DNA and a versatile color palette, these adidas shoes were designed with your unique style in mind. An updated 3-Stripes design adds a playful touch, while the leather upper and rubber outsole ensure comfort.',
+  });
+  //New Balance 550 - BeigeGreen
+  arr.push({
+    name: 'New Balance 550 - BeigeGreen 4',
+    price: 100.0,
+    image:
+      'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
+    description:
+      'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
+  });
+  // Adidas tenis Forum Mid - Cloud White
+  arr.push({
+    name: 'Adidas tenis Forum Mid - Cloud White 4',
+    price: 64.0,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/13085062e6fd497fb6faac5e00302b1b_9366/Tenis_Forum_Mid_Blanco_FY4975_01_standard.jpg',
+    description:
+      'Forum Mid is a new product for Unisex from adidas. We invite you to see the images to appreciate more details from different angles. If you already know Forum Mid S you can leave a review below; We always love to hear your opinion.',
+  });
+  // Adidas tenis Forum Low - Royal Blue
+  arr.push({
+    name: 'Adidas tenis Forum Low - Royal Blue 4',
+    price: 68.0,
+    image:
+      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg',
+    description:
+      'More than a shoe, it is a statement of style. The adidas Forum arrived on the scene in 84 and gained a following on the pitch and in the music world. Bringing back 80s attitude, the explosive energy of basketball, and the iconic X-shaped ankle design, this pair of classic sneakers. Distilled in a low-cut version designed for the streets.',
+  });
 }
 //Render products on page
 function renderProducts(arr) {
@@ -177,12 +373,12 @@ function renderProducts(arr) {
 
     const productInfoFigure = document.createElement('figure');
     const productCardIcon = document.createElement('img');
+    productCardIcon.addEventListener('click', changeCartList);
     productCardIcon.setAttribute('src', './icons/bt_add_to_cart.svg');
     productInfoFigure.appendChild(productCardIcon);
     productCardIcon.setAttribute('index', arr.indexOf(product));
 
     productInfo.append(productInfoDiv, productInfoFigure);
-    productInfoFigure.addEventListener('click', changeCartList);
     productCard.append(productImg, productInfo);
     productCard.addEventListener('click', (e) => {
       openProductDetail(e);
@@ -202,9 +398,11 @@ function openProductDetail(e) {
     return;
   }
   let productSelected;
+  let index;
   for (pCard of productCards) {
     if (pCard.contains(e.target)) {
-      productSelected = productList[pCard.getAttribute('index')];
+      index = pCard.getAttribute('index');
+      productSelected = productList[index];
       break;
     }
   }
@@ -222,21 +420,43 @@ function openProductDetail(e) {
   const productDesc = productDetailContainer.querySelector('p:nth-of-type(3)');
   productDesc.innerText = productSelected.description;
 
+  let addedToCart = cartList.some((element) => {
+    if (element.name === productSelected.name) {
+      return true;
+    }
+    return false;
+  });
+  setProductDetailBtnStyle(addedToCart);
+  productDetailCartBtn.setAttribute('index', index);
+
   productDetailContainer.classList.remove('inactive');
 }
-
+function setProductDetailBtnStyle(flag) {
+  let img = productDetailCartBtn.querySelector('img');
+  if (flag) {
+    img.setAttribute('src', './icons/bt_added_to_cart.svg');
+    productDetailCartBtn.innerText = '';
+    productDetailCartBtn.append(img, 'Added to cart');
+    productDetailCartBtn.style.background = '#ffffff';
+    productDetailCartBtn.style.color = '#acd9b2';
+    productDetailCartBtn.style.border = ' solid 1px #acd9b2';
+  } else {
+    img.setAttribute('src', './icons/bt_add_to_cart.svg');
+    productDetailCartBtn.innerText = '';
+    productDetailCartBtn.append(img, 'Add to cart');
+    productDetailCartBtn.style = '';
+  }
+}
 //Change cartlist on product cart icon click
 function changeCartList() {
-  let iconImage = this.querySelector('.product-info figure img');
+  let iconImage = this;
   imageSrc = iconImage.getAttribute('src');
-  let index = this.querySelector('.product-info figure img').getAttribute(
-    'index'
-  );
+  let index = this.getAttribute('index');
+
   let product = productList[index];
   if (imageSrc !== './icons/bt_added_to_cart.svg') {
     iconImage.setAttribute('src', './icons/bt_added_to_cart.svg');
-    cartList.push(product);
-    addProductOrder(product, cartList.length - 1);
+    addProductOrder(product, cartList.length);
   } else {
     removeProductOrder(product, cartList.indexOf(product));
   }
@@ -289,15 +509,17 @@ function renderOrderContent(arr) {
   totalN.innerText = sum;
 
   order.append(totalP, totalN);
-
+  const aCheckout = document.createElement('a');
+  aCheckout.setAttribute('href', 'clase9.html');
   const checkoutBtn = document.createElement('button');
   checkoutBtn.classList.add('primary-button');
   checkoutBtn.innerText = 'Checkout';
-
+  aCheckout.append(checkoutBtn);
   shoppingCartNumber.innerText = arr.length;
-  orderContent.append(order, checkoutBtn);
+  orderContent.append(order, aCheckout);
 }
 function addProductOrder(product, index) {
+  cartList.push(product);
   const shoppingProduct = document.createElement('div');
   shoppingProduct.classList.add('shopping-cart');
   shoppingProduct.setAttribute('index', index);
@@ -330,10 +552,8 @@ function addProductOrder(product, index) {
     removeProductOrder(cartList[ix], ix);
   });
   orderProducts.append(shoppingProduct);
-
   let curr = parseFloat(orderTotal.innerText.replace('$', ''));
   orderTotal.innerText = '$' + (curr + product.price).toFixed(2);
-
   shoppingCartNumber.innerText = cartList.length;
 }
 function removeProductOrder(product, index) {
@@ -343,6 +563,7 @@ function removeProductOrder(product, index) {
   let i = 0;
   for (p of orderProductList) {
     i++;
+    console.log(p);
     if (index == p.getAttribute('index')) {
       productToRemove = p;
       break;
@@ -350,7 +571,6 @@ function removeProductOrder(product, index) {
   }
   orderProducts.removeChild(productToRemove);
   let curr = parseFloat(orderTotal.innerText.replace('$', ''));
-  // console.log(curr + ' - ' + productPrice);
   orderTotal.innerText = '$' + (curr - product.price).toFixed(2);
 
   //Updates index for the other product after the removed one
@@ -371,13 +591,11 @@ function removeProductOrder(product, index) {
       p.setAttribute('src', './icons/bt_add_to_cart.svg');
     }
   }
+  console.log(index);
   cartList.splice(index, 1);
   shoppingCartNumber.innerText = cartList.length;
 }
-//Login
-// function updateMenuEmail(currAcc) {
-//   menuEmail.innerText = currAccount.email;
-// }
+
 //Media querie to display menu
 function menuDisplay(mediaQuery) {
   if (mediaQuery.matches) mobileMenu.classList.add('inactive');
