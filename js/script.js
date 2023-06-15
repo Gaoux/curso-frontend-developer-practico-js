@@ -140,6 +140,24 @@ function setProductList(arr) {
     description:
       'Cream white, light grey, calf leather, calf suede, 3-Stripes signature detail, round toe, lace-up front closure, logo patch at tongue, hook and loop front closure, logo insole and sole rubber. These styles are supplied by a tennis marketplace, which offers the most coveted and difficult to find items from around the world.',
   });
+  //Infused Gel
+  arr.push({
+    name: 'Infused Gel',
+    price: 70,
+    image:
+      'https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    description:
+      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
+  });
+  //Earrings
+  arr.push({
+    name: 'Earrings',
+    price: 70,
+    image:
+      'https://images.pexels.com/photos/2849743/pexels-photo-2849743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    description:
+      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
+  });
   //Air Jordan 1 Mid SE Craft
   arr.push({
     name: 'Air Jordan 1 Mid SE Craft',
@@ -149,14 +167,49 @@ function setProductList(arr) {
     description:
       'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
   });
+  // Milk
+  arr.push({
+    name: 'Milk',
+    price: 5,
+    image:
+      'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    description:
+      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
+  });
+  arr.push({
+    name: 'Ice Cream',
+    price: 14.7,
+    image:
+      'https://images.pexels.com/photos/380954/pexels-photo-380954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    description:
+      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
+  });
   //Adidas Tenis ADI2000
   arr.push({
-    name: 'Adidas Tenis ADI2000',
-    price: 89.9,
+    name: 'Camera',
+    price: 156.99,
     image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/658ac4f70f144c3ca036ae6f0116ec80_9366/Tenis_adi2000_Blanco_GV9544_04_standard.jpg',
+      'https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     description:
       'Show your rebellious side in the adi2000 shoes, inspired by the bold era of the early 2000s. With skate DNA and a versatile color palette, these adidas shoes were designed with your unique style in mind. An updated 3-Stripes design adds a playful touch, while the leather upper and rubber outsole ensure comfort.',
+  });
+  //Pineapple
+  arr.push({
+    name: 'Pineapple',
+    price: 1000.0,
+    image:
+      'https://images.pexels.com/photos/4195527/pexels-photo-4195527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    description:
+      'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
+  });
+  //Cupcake
+  arr.push({
+    name: 'Cupcake',
+    price: 1000.0,
+    image:
+      'https://images.pexels.com/photos/1026123/pexels-photo-1026123.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    description:
+      'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
   });
   //New Balance 550 - BeigeGreen
   arr.push({
@@ -166,188 +219,6 @@ function setProductList(arr) {
       'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
     description:
       'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
-  });
-  // Adidas tenis Forum Mid - Cloud White
-  arr.push({
-    name: 'Adidas tenis Forum Mid - Cloud White',
-    price: 64.0,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/13085062e6fd497fb6faac5e00302b1b_9366/Tenis_Forum_Mid_Blanco_FY4975_01_standard.jpg',
-    description:
-      'Forum Mid is a new product for Unisex from adidas. We invite you to see the images to appreciate more details from different angles. If you already know Forum Mid S you can leave a review below; We always love to hear your opinion.',
-  });
-  // Adidas tenis Forum Low - Royal Blue
-  arr.push({
-    name: 'Adidas tenis Forum Low - Royal Blue',
-    price: 68.0,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg',
-    description:
-      'More than a shoe, it is a statement of style. The adidas Forum arrived on the scene in 84 and gained a following on the pitch and in the music world. Bringing back 80s attitude, the explosive energy of basketball, and the iconic X-shaped ankle design, this pair of classic sneakers. Distilled in a low-cut version designed for the streets.',
-  });
-
-  //Copy and paste from now on
-  //'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny
-  arr.push({
-    name: 'Adidas tenis Forum Buckle Low "White" from adidas x Bad Bunny 2',
-    price: 160,
-    image:
-      'https://cdn.shopify.com/s/files/1/2031/6995/articles/629728_2048x.jpg?v=1670425199://media.gq.com.mx/photos/643daf83730abff2c7881920/master/pass/tenis-adidas-campus-x-bad-bunny-wild-moss-verdes-caracteristicas-fecha-de-lanzamiento.png',
-    description:
-      'Cream white, light grey, calf leather, calf suede, 3-Stripes signature detail, round toe, lace-up front closure, logo patch at tongue, hook and loop front closure, logo insole and sole rubber. These styles are supplied by a tennis marketplace, which offers the most coveted and difficult to find items from around the world.',
-  });
-  //Air Jordan 1 Mid SE Craft
-  arr.push({
-    name: 'Air Jordan 1 Mid SE Craft 2',
-    price: 135,
-    image:
-      'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/44239991-a986-4c5f-a871-4f20a0c756d4/calzado-air-jordan-1-mid-se-craft-wJLJQs.png',
-    description:
-      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
-  });
-  //Adidas Tenis ADI2000
-  arr.push({
-    name: 'Adidas Tenis ADI2000 2',
-    price: 89.9,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/658ac4f70f144c3ca036ae6f0116ec80_9366/Tenis_adi2000_Blanco_GV9544_04_standard.jpg',
-    description:
-      'Show your rebellious side in the adi2000 shoes, inspired by the bold era of the early 2000s. With skate DNA and a versatile color palette, these adidas shoes were designed with your unique style in mind. An updated 3-Stripes design adds a playful touch, while the leather upper and rubber outsole ensure comfort.',
-  });
-  //New Balance 550 - BeigeGreen
-  arr.push({
-    name: 'New Balance 550 - BeigeGreen 2',
-    price: 100.0,
-    image:
-      'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
-    description:
-      'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
-  });
-  // Adidas tenis Forum Mid - Cloud White
-  arr.push({
-    name: 'Adidas tenis Forum Mid - Cloud White 2',
-    price: 64.0,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/13085062e6fd497fb6faac5e00302b1b_9366/Tenis_Forum_Mid_Blanco_FY4975_01_standard.jpg',
-    description:
-      'Forum Mid is a new product for Unisex from adidas. We invite you to see the images to appreciate more details from different angles. If you already know Forum Mid S you can leave a review below; We always love to hear your opinion.',
-  });
-  // Adidas tenis Forum Low - Royal Blue
-  arr.push({
-    name: 'Adidas tenis Forum Low - Royal Blue 2 ',
-    price: 68.0,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg',
-    description:
-      'More than a shoe, it is a statement of style. The adidas Forum arrived on the scene in 84 and gained a following on the pitch and in the music world. Bringing back 80s attitude, the explosive energy of basketball, and the iconic X-shaped ankle design, this pair of classic sneakers. Distilled in a low-cut version designed for the streets.',
-  });
-  //'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny
-  arr.push({
-    name: 'Adidas tenis Forum Buckle Low "White" from adidas x Bad Bunny 3',
-    price: 160,
-    image:
-      'https://cdn.shopify.com/s/files/1/2031/6995/articles/629728_2048x.jpg?v=1670425199://media.gq.com.mx/photos/643daf83730abff2c7881920/master/pass/tenis-adidas-campus-x-bad-bunny-wild-moss-verdes-caracteristicas-fecha-de-lanzamiento.png',
-    description:
-      'Cream white, light grey, calf leather, calf suede, 3-Stripes signature detail, round toe, lace-up front closure, logo patch at tongue, hook and loop front closure, logo insole and sole rubber. These styles are supplied by a tennis marketplace, which offers the most coveted and difficult to find items from around the world.',
-  });
-  //Air Jordan 1 Mid SE Craft
-  arr.push({
-    name: 'Air Jordan 1 Mid SE Craft 3',
-    price: 135,
-    image:
-      'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/44239991-a986-4c5f-a871-4f20a0c756d4/calzado-air-jordan-1-mid-se-craft-wJLJQs.png',
-    description:
-      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
-  });
-  //Adidas Tenis ADI2000
-  arr.push({
-    name: 'Adidas Tenis ADI2000 3',
-    price: 89.9,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/658ac4f70f144c3ca036ae6f0116ec80_9366/Tenis_adi2000_Blanco_GV9544_04_standard.jpg',
-    description:
-      'Show your rebellious side in the adi2000 shoes, inspired by the bold era of the early 2000s. With skate DNA and a versatile color palette, these adidas shoes were designed with your unique style in mind. An updated 3-Stripes design adds a playful touch, while the leather upper and rubber outsole ensure comfort.',
-  });
-  //New Balance 550 - BeigeGreen
-  arr.push({
-    name: 'New Balance 550 - BeigeGreen 3',
-    price: 100.0,
-    image:
-      'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
-    description:
-      'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
-  });
-  // Adidas tenis Forum Mid - Cloud White
-  arr.push({
-    name: 'Adidas tenis Forum Mid - Cloud White 3',
-    price: 64.0,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/13085062e6fd497fb6faac5e00302b1b_9366/Tenis_Forum_Mid_Blanco_FY4975_01_standard.jpg',
-    description:
-      'Forum Mid is a new product for Unisex from adidas. We invite you to see the images to appreciate more details from different angles. If you already know Forum Mid S you can leave a review below; We always love to hear your opinion.',
-  });
-  // Adidas tenis Forum Low - Royal Blue
-  arr.push({
-    name: 'Adidas tenis Forum Low - Royal Blue 3 ',
-    price: 68.0,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg',
-    description:
-      'More than a shoe, it is a statement of style. The adidas Forum arrived on the scene in 84 and gained a following on the pitch and in the music world. Bringing back 80s attitude, the explosive energy of basketball, and the iconic X-shaped ankle design, this pair of classic sneakers. Distilled in a low-cut version designed for the streets.',
-  });
-  //'Adidas tenis Forum Buckle Low "White" de adidas x Bad Bunny
-  arr.push({
-    name: 'Adidas tenis Forum Buckle Low "White" from adidas x Bad Bunny 4',
-    price: 160,
-    image:
-      'https://cdn.shopify.com/s/files/1/2031/6995/articles/629728_2048x.jpg?v=1670425199://media.gq.com.mx/photos/643daf83730abff2c7881920/master/pass/tenis-adidas-campus-x-bad-bunny-wild-moss-verdes-caracteristicas-fecha-de-lanzamiento.png',
-    description:
-      'Cream white, light grey, calf leather, calf suede, 3-Stripes signature detail, round toe, lace-up front closure, logo patch at tongue, hook and loop front closure, logo insole and sole rubber. These styles are supplied by a tennis marketplace, which offers the most coveted and difficult to find items from around the world.',
-  });
-  //Air Jordan 1 Mid SE Craft
-  arr.push({
-    name: 'Air Jordan 1 Mid SE Craft 4',
-    price: 135,
-    image:
-      'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/44239991-a986-4c5f-a871-4f20a0c756d4/calzado-air-jordan-1-mid-se-craft-wJLJQs.png',
-    description:
-      'Fire up the style with this handcrafted version of the Air Jordan 1 Mid. Its "inside-out"-inspired construction, including unique layers and exposed foam details, elevates the style of this timeless garment from Jordan Brand. Details like decorative stitching on the Swoosh add coveted appeal, while unexpected shading, the rich mix of materials and distressed aesthetics in the midsole give this release a handcrafted finish.',
-  });
-  //Adidas Tenis ADI2000
-  arr.push({
-    name: 'Adidas Tenis ADI2000 4',
-    price: 89.9,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/658ac4f70f144c3ca036ae6f0116ec80_9366/Tenis_adi2000_Blanco_GV9544_04_standard.jpg',
-    description:
-      'Show your rebellious side in the adi2000 shoes, inspired by the bold era of the early 2000s. With skate DNA and a versatile color palette, these adidas shoes were designed with your unique style in mind. An updated 3-Stripes design adds a playful touch, while the leather upper and rubber outsole ensure comfort.',
-  });
-  //New Balance 550 - BeigeGreen
-  arr.push({
-    name: 'New Balance 550 - BeigeGreen 4',
-    price: 100.0,
-    image:
-      'https://media.revistagq.com/photos/619389b5fc5992de454ecb76/1:1/w_1079,h_1079,c_limit/245641983_888969852012096_2359717687648261478_n.jpg',
-    description:
-      'Simple and clean, not overloaded. We recreate a classic, timeless sneaker with this tribute to the pros of the 90s and the streetwear that defined a generation of basketball. Made for the player who knows the authenticity and origin of the New Balance 550. EVA cushioning. The 550s streamlined, low-top silhouette offers a clean take on the rugged designs of the late 80s, while the reliable suede and leather upper construction is a classic look for any era.',
-  });
-  // Adidas tenis Forum Mid - Cloud White
-  arr.push({
-    name: 'Adidas tenis Forum Mid - Cloud White 4',
-    price: 64.0,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/13085062e6fd497fb6faac5e00302b1b_9366/Tenis_Forum_Mid_Blanco_FY4975_01_standard.jpg',
-    description:
-      'Forum Mid is a new product for Unisex from adidas. We invite you to see the images to appreciate more details from different angles. If you already know Forum Mid S you can leave a review below; We always love to hear your opinion.',
-  });
-  // Adidas tenis Forum Low - Royal Blue
-  arr.push({
-    name: 'Adidas tenis Forum Low - Royal Blue 4',
-    price: 68.0,
-    image:
-      'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg',
-    description:
-      'More than a shoe, it is a statement of style. The adidas Forum arrived on the scene in 84 and gained a following on the pitch and in the music world. Bringing back 80s attitude, the explosive energy of basketball, and the iconic X-shaped ankle design, this pair of classic sneakers. Distilled in a low-cut version designed for the streets.',
   });
 }
 //Render products on page
