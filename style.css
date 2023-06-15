@@ -337,7 +337,6 @@ nav {
   /* padding: 0 5px 24px 5px; */
   border: solid 1px var(--very-light-pink);
   border-bottom-left-radius: 20px;
-  transition: 0.3s;
   z-index: 10;
 }
 .product-detail-close {
@@ -582,6 +581,7 @@ nav {
   .product-detail {
     right: 0;
     width: 100%;
+    transition: 0.3s;
   }
   .product-detail.inactive {
     display: block;
