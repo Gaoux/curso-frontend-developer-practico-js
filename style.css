@@ -1,8 +1,11 @@
 :root {
-  --white: #ffffff;
-  --black: #000000;
+  --white: #212121;
+  /* --white: #ffffff; */
+  --black: #ffffff;
+  /* --black: #000000; */
   --very-light-pink: #c7c7c7;
-  --text-input-field: #f7f7f7;
+  --text-input-field: #686868;
+  /* --text-input-field: #f7f7f7; */
   --hospital-green: #acd9b2;
   --sm: 14px;
   --md: 16px;
@@ -18,8 +21,10 @@
   left: -200px;
 }
 body {
+  background-color: var(--white);
   margin: 0;
   font-family: 'Quicksand', sans-serif;
+  color: var(--black);
 }
 
 /* Start page */
@@ -354,7 +359,7 @@ nav {
   transition: all 0.3s ease-in;
 }
 .product-detail-close:hover {
-  background: #fff0eb;
+  background: var(--text-input-field);
 }
 .product-detail-close img {
   padding: 0 0 1.5px 0;
